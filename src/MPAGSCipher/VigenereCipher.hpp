@@ -3,7 +3,7 @@
 
 #include "CipherMode.hpp"
 #include "CaesarCipher.hpp"
-
+#include "Cipher.hpp"
 #include <string>
 #include <map>
 
@@ -16,7 +16,9 @@
  * \class VigenereCipher
  * \brief Encrypt or decrypt text using the Vigenere cipher with the given key
  */
-class VigenereCipher {
+
+
+class VigenereCipher : public Cipher {
   public:
     /**
      * \brief Create a new PlayfairCipher with the given key
@@ -32,15 +34,9 @@ class VigenereCipher {
      */
     void setKey(const std::string& key);
 
-    /**
-     * \brief Apply the cipher to the provided text
-     *
-     * \param inputText the text to encrypt or decrypt
-     * \param cipherMode whether to encrypt or decrypt the input text
-     * \return the result of applying the cipher to the input text
-     */
-    std::string applyCipher(const std::string& inputText,
-                            const CipherMode cipherMode) const;
+
+    virtual std::string applyCipher(const std::string& input,
+                                    const CipherMode mode) const override;
 
     /**
      * \brief Returns the key of the cipher

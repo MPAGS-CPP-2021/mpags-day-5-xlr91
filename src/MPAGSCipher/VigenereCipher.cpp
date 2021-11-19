@@ -28,10 +28,15 @@ void VigenereCipher::setKey(const std::string& key)
         key_ = "KEY"; //default
     }
 
-    std::size_t letpos{0};
+    
+    charLookup_.clear();
     for (char const &c : key_){
-        letpos = Alphabet::alphabet.find(c);
+    
+        if (charLookup_.find(c) != charLookup_.end()){
+            continue;
+        }
 
+        const std::size_t letpos{Alphabet::alphabet.find(c)};
         CaesarCipher cc{letpos};
         std::pair<char, CaesarCipher> p{c, cc};
         charLookup_.insert(p);
@@ -56,7 +61,7 @@ std::string VigenereCipher::applyCipher(const std::string& inputText,
     std::string outputText;
     
     for(std::size_t i{0}; i < inputText.size(); ++i){
-        char keychar = key_.at(i % key_.size()); //find and repeat
+        const char keychar = key_.at(i % key_.size()); //find and repeat
 
         CaesarCipher currentCaesar{charLookup_.at(keychar)};
 

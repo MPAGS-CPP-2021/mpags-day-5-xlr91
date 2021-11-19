@@ -4,33 +4,41 @@
 #include "CipherMode.hpp"
 #include <string>
 
-
 /**
  * \file Cipher.hpp
  * \brief Contains the declaration of the Cipher virtual class
  */
 
-class Cipher{
-    public:
+class Cipher {
+  public:
+    //Basic resource management function that needs to be defined
+    Cipher() = default;
+    /**
+     * \brief Copy constructor
+     */
+    Cipher(const Cipher& rhs) = default;
+    /**
+     * \brief Move constructor
+     */
+    Cipher(Cipher&& rhs) = default;
+    /**
+     * \brief Copy assignment operator
+     */
+    Cipher& operator=(const Cipher& rhs) = default;
+    /**
+     * \brief Move assignment operator
+     */
+    Cipher& operator=(Cipher&& rhs) = default;
 
-        //Basic resource management function that needs to be defined
-        Cipher() = default;
-        Cipher(const Cipher& rhs) = default;
-        Cipher(Cipher&& rhs) = default;
-        Cipher& operator = (const Cipher& rhs) = default;
-        Cipher& operator=(Cipher&& rhs) = default;    
-        virtual ~Cipher() = default;
+    /**
+     * \brief Destructor
+     */
+    virtual ~Cipher() = default;
 
-        /**
-         * \brief Apply the cipher to the provided text
-         *
-         * \param inputText the text to encrypt or decrypt
-         * \param cipherMode whether to encrypt or decrypt the input text
-         * \return the result of applying the cipher to the input text
-         */
-        virtual std::string applyCipher( const std::string& input, const CipherMode mode) const = 0;
-
-}
+   
+    virtual std::string applyCipher(const std::string& input,
+                                    const CipherMode mode) const = 0;
+};
 
 
-
+#endif
