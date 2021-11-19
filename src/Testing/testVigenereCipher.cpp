@@ -30,6 +30,12 @@ TEST_CASE("VigenerCipher Cipher encryption", "[vigenere]") {
   REQUIRE( vc.applyCipher("HELLOWORLD", CipherMode::Encrypt) == "RIJVSUYVJN");
 }
 
+
+TEST_CASE("VigenerCipher Cipher decryption", "[vigenere]") {
+  VigenereCipher vc{"KEY"};
+  REQUIRE( vc.applyCipher("RIJVSUYVJN", CipherMode::Decrypt) == "HELLOWORLD");
+}
+
 /*
 TEST_CASE("VigenerCipher Cipher encryption", "[playfair]") {
   VigenerCipher cc{"hello"};

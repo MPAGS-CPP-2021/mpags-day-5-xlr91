@@ -62,8 +62,7 @@ std::string VigenereCipher::applyCipher(const std::string& inputText,
 
         std::string cipherstring = "";
         cipherstring +=  inputText.at(i);
-        
-        std::cout << cipherstring << std::endl;
+    
         outputText += currentCaesar.applyCipher(cipherstring ,cipherMode);
     }
     
