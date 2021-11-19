@@ -38,3 +38,7 @@
 *.exe
 *.out
 *.app
+
+
+#personal
+.vscode/*
