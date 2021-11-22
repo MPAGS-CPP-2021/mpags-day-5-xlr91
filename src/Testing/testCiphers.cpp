@@ -1,8 +1,11 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-#include "PlayfairCipher.hpp"
+#include "CipherFactory.hpp"
+#include <map>
+#include <vector>
 #include "CaesarCipher.hpp"
+#include "PlayfairCipher.hpp"
 #include "VigenereCipher.hpp"
 
 
@@ -15,9 +18,35 @@ bool testCipher(const Cipher& cipher, const CipherMode mode, const std::string& 
 
 
 
+
+
+
+TEST_CASE("full cipher test encryption", "[all]"){
+
+  std::vector<std::unique_ptr<Cipher>> cipherInventory;
+  cipherInventory.push_back(cipherFactory(CipherType::Caesar, "10"));
+  cipherInventory.push_back(cipherFactory(CipherType::Playfair, "hello"));
+  cipherInventory.push_back(cipherFactory(CipherType::Vigenere, "KEY"));
+
+  std::vector<std::string> plaintext;
+  plaintext.push_back("HELLO");
+  plaintext.push_back("BOBISSOMESORTOFJUNIORCOMPLEXXENOPHONEONEZEROTHING");
+  plaintext.push_back("HELLOWORLD");
+
+  std::vector<std::string> ciphertext;
+  ciphertext.push_back("ROVVY");
+  ciphertext.push_back("FHIQXLTLKLTLSUFNPQPKETFENIOLVSWLTFIAFTLAKOWATEQOKPPA");
+  ciphertext.push_back("RIJVSUYVJN");
+
+  for(std::vector<int>::size_type i = 0; i < plaintext.size(); ++i){
+    REQUIRE(cipherInventory.at(i) -> applyCipher(plaintext.at(i), CipherMode::Encrypt) == ciphertext.at(i));
+  }
+}
+
+
+//could use maps similarly to what was shown on the solutions
 TEST_CASE("Caesar Cipher encryption", "[caesar]")
 {
-    
     CaesarCipher cc{10};
     std::string input = "HELLOWORLD";
     std::string output = "ROVVYGYBVN";

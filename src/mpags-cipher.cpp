@@ -1,10 +1,7 @@
-#include "CaesarCipher.hpp"
 #include "CipherMode.hpp"
 #include "CipherType.hpp"
-#include "PlayfairCipher.hpp"
 #include "ProcessCommandLine.hpp"
 #include "TransformChar.hpp"
-#include "VigenereCipher.hpp"
 #include "CipherFactory.hpp"
 
 #include <cctype>
@@ -98,6 +95,11 @@ int main(int argc, char* argv[])
     //change this
 
     auto aCipher = cipherFactory(settings.cipherType, settings.cipherKey);
+
+    if(!aCipher){
+        std::cerr<< "[error] problem constructing required cipher" << std::endl;
+        return 1;
+    }
     outputText = aCipher -> applyCipher(inputText, settings.cipherMode);
 
     /*

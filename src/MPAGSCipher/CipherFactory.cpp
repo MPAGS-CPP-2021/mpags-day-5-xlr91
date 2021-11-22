@@ -23,9 +23,9 @@ std::unique_ptr<Cipher> cipherFactory(const CipherType type, const std::string& 
             return std::make_unique<VigenereCipher>(key);
             break;
         }
-        default: 
-            return std::make_unique<CaesarCipher>(key); //use CaesarCipher as the default
     }
+
+    return std::unique_ptr<Cipher>{};
     
 }
 
