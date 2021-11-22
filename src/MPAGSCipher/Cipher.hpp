@@ -35,7 +35,12 @@ class Cipher {
      */
     virtual ~Cipher() = default;
 
-   
+    /**
+     * \brief Apply the current cipher on the input string, either encrypt or decrypt
+     *
+     * \param input input string
+     * \param mode Cipher mode of current cipher, either encrypt or decrypt
+     */   
     virtual std::string applyCipher(const std::string& input,
                                     const CipherMode mode) const = 0;
 };

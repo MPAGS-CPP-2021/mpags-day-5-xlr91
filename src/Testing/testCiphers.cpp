@@ -9,17 +9,10 @@
 #include "VigenereCipher.hpp"
 
 
-
 bool testCipher(const Cipher& cipher, const CipherMode mode, const std::string& inputText, const std::string& outputText){
 
     return (cipher.applyCipher(inputText, mode) == outputText);
 }
-
-
-
-
-
-
 
 TEST_CASE("full cipher test encryption", "[all]"){
 
