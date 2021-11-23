@@ -10,7 +10,6 @@
 
 
 bool testCipher(const Cipher& cipher, const CipherMode mode, const std::string& inputText, const std::string& outputText){
-
     return (cipher.applyCipher(inputText, mode) == outputText);
 }
 
@@ -78,9 +77,9 @@ TEST_CASE("Playfair Cipher decryption", "[playfair]") {
 
 
 TEST_CASE("VigenerCipher Cipher encryption", "[vigenere]") {
-  VigenereCipher vc{"KEY"};
-  std::string input = "HELLOWORLD";
-  std::string output = "RIJVSUYVJN";
+  VigenereCipher vc{"GRAVITY"}; //from gravity falls
+  std::string input = "MABELEATSSPRINKLES";
+  std::string output = "SRBZTXYZJSKZBLQCEN";
 
   REQUIRE(testCipher(vc, CipherMode::Encrypt, input, output));
 }

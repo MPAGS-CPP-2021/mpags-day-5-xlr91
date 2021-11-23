@@ -22,16 +22,17 @@ void VigenereCipher::setKey(const std::string& key)
     key_.erase(std::remove_if(std::begin(key_), std::end(key_),
                               [](char c) { return !std::isalpha(c); }),
                std::end(key_));
+    
     //cheeck if the key is empty and replace it with default if so
-
     if(key_.empty()){
         key_ = "KEY"; //default
     }
 
     
     charLookup_.clear();
+    //create caesar cipher for each letter
     for (char const &c : key_){
-    
+        //prevents duplicate
         if (charLookup_.find(c) != charLookup_.end()){
             continue;
         }
@@ -41,12 +42,6 @@ void VigenereCipher::setKey(const std::string& key)
         std::pair<char, CaesarCipher> p{c, cc};
         charLookup_.insert(p);
     }
-
-    //loop over the key
-    
-        //find the letter position in the alphabet
-        //create caesarecipher using this position as a key
-        //insert a std::pair of the letter and caesar cipher into the lookcup
 }
 
 
