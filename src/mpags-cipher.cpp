@@ -1,9 +1,8 @@
-#include "CaesarCipher.hpp"
 #include "CipherMode.hpp"
 #include "CipherType.hpp"
-#include "PlayfairCipher.hpp"
 #include "ProcessCommandLine.hpp"
 #include "TransformChar.hpp"
+#include "CipherFactory.hpp"
 
 #include <cctype>
 #include <fstream>
@@ -92,6 +91,18 @@ int main(int argc, char* argv[])
 
     std::string outputText;
 
+
+    //change this
+
+    auto aCipher = cipherFactory(settings.cipherType, settings.cipherKey);
+
+    if(!aCipher){
+        std::cerr<< "[error] problem constructing required cipher" << std::endl;
+        return 1;
+    }
+    outputText = aCipher -> applyCipher(inputText, settings.cipherMode);
+
+    /*
     switch (settings.cipherType) {
         case CipherType::Caesar: {
             // Run the Caesar cipher (using the specified key and encrypt/decrypt flag) on the input text
@@ -104,7 +115,13 @@ int main(int argc, char* argv[])
             outputText = cipher.applyCipher(inputText, settings.cipherMode);
             break;
         }
+
+        case CipherType::Vigenere: {
+            VigenereCipher cipher{settings.cipherKey};
+            outputText = cipher.applyCipher(inputText, settings.cipherMode);
+        }
     }
+    */
 
     // Output the encrypted/decrypted text to stdout/file
     if (!settings.outputFile.empty()) {
